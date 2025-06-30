@@ -140,11 +140,15 @@ class HairstyleSwitcher {
     const container = document.createElement('div');
     container.classList.add('hairstyle-switcher');
 
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('hairstyle-buttons');
+    container.appendChild(buttonContainer);
+
     this.hairstyles.forEach((hairstyle, index) => {
       const button = document.createElement('button');
       button.textContent = hairstyle.name;
       button.addEventListener('click', () => this.switchHairstyle(index));
-      container.appendChild(button);
+      buttonContainer.appendChild(button);
     });
 
     document.body.appendChild(container);
