@@ -2,13 +2,17 @@
 
 BarberBuddy AR Interface is a web-based application that uses your webcam to let you try on different hairstyles in real-time using 3D models. It leverages face tracking to accurately place the virtual hairstyle on your head.
 
-<!-- Procedure to run the file -->
+## Features
+
+*   **Real-time 3D Hairstyle Try-On:** Uses your webcam to overlay 3D hairstyle models on your head in real-time.
+*   **Face Shape Detection:** Analyzes your face shape to recommend suitable hairstyles.
+*   **Hairstyle Switching:** Allows you to switch between different hairstyles.
+
 ## How to Run
 
 To run this project locally, you need to serve the files using a local web server.
 
 1.  **Prerequisites:** Make sure you have [Node.js](https://nodejs.org/) installed, which includes `npm`.
-
 2.  **Start the Server:** Open your terminal in the root directory of the project and run the following command:
     ```bash
     npx http-server
@@ -18,10 +22,40 @@ To run this project locally, you need to serve the files using a local web serve
     Use the live server extention on the vscode to view the index.html file
 
 3.  **View in Browser:** Open your web browser and navigate to the local address provided by the server (e.g., `http://localhost:8080` or 'localhost:5500).
-
 4.  **Enable Webcam:** Grant the browser permission to access your webcam when prompted. You should now see the application running.
 
-<!-- Procedure to add 3D models -->
+## Face Shape Detection Setup
+
+To run the face shape detection feature, you need to set up a Python environment and run the Flask server.
+
+1.  **Create a Virtual Environment:**
+    ```bash
+    python3 -m venv .venv
+    ```
+
+2.  **Activate the Virtual Environment:**
+    *   **On macOS and Linux:**
+        ```bash
+        source .venv/bin/activate
+        ```
+    *   **On Windows:**
+        ```bash
+        .venv\Scripts\activate
+        ```
+
+3.  **Install Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Run the Flask Server:**
+    ```bash
+    python app.py
+    ```
+    or use the default code runner in the vscode
+
+5.  **Access the Application:** Open `[Face_Detector](http://127.0.0.1:5000)` in your browser.
+
 ## Adding New 3D Hairstyles
 
 The project uses Three.js legacy JSON format for models. If you have a model in `.glb` or `.gltf` format, you can convert it using the following process.
@@ -52,14 +86,16 @@ The project uses Three.js legacy JSON format for models. If you have a model in 
 4.  **Cleanup:** You can delete the `.bin`, `.gltf`, and `.glb` files after the process is complete.
 
 5.  **Integrate:** Move the new `.json` file and its textures to the `models/hairstyle` directory and add the model data in `models.json`.
- hair model 
-<!-- Files and Dependencies -->
+
 ## Project Structure
 
 Here is an overview of the key files and directories in the project.
 
 *   `index.html`: The main HTML file that structures the web page and includes all the necessary scripts.
 *   `main.js`: The core application logic. It initializes the face tracking, sets up the Three.js 3D scene, loads the hairstyle and face models, and manages the render loop.
+*   `faceshape.html`: The HTML file for the face shape detection feature.
+*   `faceshape.js`: The JavaScript file for the face shape detection feature.
+*   `app.py`: The Python backend for the face shape detection feature.
 *   `readme.md`: This file, providing information about the project.
 
 *   `appearance/`: Contains front-end assets.
@@ -87,3 +123,13 @@ Here is an overview of the key files and directories in the project.
 *   **[Jeeliz FaceFilter](https://github.com/jeeliz/jeelizFaceFilter):** A JavaScript library for real-time face tracking and detection from the webcam video stream.
 *   **[gltf-pipeline](https://github.com/CesiumGS/gltf-pipeline):** A command-line tool for converting and optimizing GLTF assets. It is a development dependency used for the model conversion process.
 *   **[Node.js](https://nodejs.org/):** Required to run the model conversion script and the local development server (`http-server`).
+
+## Next Steps
+
+*   **Get Hair Models:** We need to acquire some 3D hair models for India based hairstyles.
+*   **UI/UX Improvement:** We need to enhance the user interface and experience.
+*   **Integrate Face Shape Recognition:** Lastly we'll integrate the face shape recognition feature (`app.py`) with the main AR application. The application should:
+    1.  Suggest the user's face shape.
+    2.  Recommend hairstyles suited to that face shape.
+    3.  Display thumbnails of the recommended hairstyles.
+    4.  Render the selected 3D hairstyle model on the user's head when a thumbnail is clicked.
